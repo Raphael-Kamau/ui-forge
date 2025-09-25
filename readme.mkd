@@ -1,0 +1,78 @@
+# 🎨 UIForge — Modular UI Templates for Web Developers
+
+**UIForge** is a productivity-boosting platform that empowers web developers to build stunning, responsive interfaces faster. Whether you're crafting a wildlife conservation site, an educational portal, or a sleek dashboard, UIForge offers pre-built components, curated color palettes, and design insights—all tailored to your project's theme.
+
+## 🚀 Features
+
+- 🧱 **Modular UI Sections**: Navbars, Hero sections, About, Contact, Dashboards, Footers, Menus, and more
+- 🎨 **Theme-Based Color Palettes**: Automatically matched to site type (e.g., wildlife, education, fintech)
+- 🌗 **Light/Dark Mode Toggle**: Built-in theme switcher for instant personalization
+- 🧠 **Design Rationale**: Understand the UX decisions behind each layout
+- ⚡ **Live Previews + Code Snippets**: Copy-paste ready components in React + TypeScript
+- 🧪 **Palette Generator** _(coming soon)_: Generate accessible palettes from images or keywords
+- 👤 **User Accounts** _(coming soon)_: Save favorite templates and palettes via Google/GitHub login
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React, TypeScript, Tailwind CSS (or Bootstrap), Framer Motion
+- **Routing & State**: React Router, Context API or Zustand
+- **Design Tools**: Figma, Chroma.js, WCAG Contrast Checker
+- **Deployment**: Vercel or Netlify
+
+## 📁 Folder Structure (WIP)
+
+-src/
+components/
+Navbars/
+HeroSections/
+Footers/
+Dashboards/
+-pages/
+Home.tsx
+Templates.tsx
+PaletteGenerator.tsx
+-theme/
+ThemeProvider.tsx
+-auth/
+(coming soon)
+Login.tsx
+Signup.tsx
+-utils/
+colorUtils.ts
+accessibilityChecker.ts
+
+## 🧭 Getting Started
+
+1. Clone the repo  
+   `git clone https://github.com/your-username/uiforge.git`
+
+2. Install dependencies  
+   `npm install`
+
+3. Start the dev server  
+   `npm run dev`
+
+4. Explore components via `/templates` route
+
+## 🧠 Inspiration
+
+UIForge was born from the need to bridge the gap between developer logic and design polish. It’s built to help devs stay productive, creative, and confident—without waiting on a designer.
+
+## 📌 Roadmap
+
+- [x] Modular UI sections
+- [x] Theme switcher
+- [ ] Palette generator
+- [ ] Google/GitHub login
+- [ ] User dashboard
+- [ ] Community template sharing
+
+## 🤝 Contributing
+
+Pull requests are welcome! If you’d like to suggest a new template, palette, or feature, feel free to open an issue or submit a PR.
+
+## 📄 License
+
+MIT
+
+---
