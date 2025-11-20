@@ -1,43 +1,30 @@
-// server/src/routes/snippets.js
-import { Router } from "express";
+// server/routes/snippets.js
+import express from "express";
 import Snippet from "../models/Snippet.js";
 
-const router = Router();
+const router = express.Router();
 
-// list + basic filters
+// GET /api/snippets?category=navbar&framework=tailwind&q=searchTerm
 router.get("/", async (req, res) => {
-  const { q, category, tag } = req.query;
-  const filter = {};
-  if (category) filter.category = category;
-  if (tag) filter.tags = tag;
-  if (q) filter.title = { $regex: q, $options: "i" };
+  try {
+    const { category, framework, q } = req.query;
+    const filter = {};
 
-  const snippets = await Snippet.find(filter).sort({ createdAt: -1 }).limit(50);
-  res.json(snippets);
-});
+    if (category && category !== "all") {
+      filter.category = category.toLowerCase();
+    }
+    if (framework && framework !== "all") {
+      filter.framework = framework.toLowerCase();
+    }
+    if (q) {
+      filter.title = { $regex: q, $options: "i" };
+    }
 
-// get one
-router.get("/:id", async (req, res) => {
-  const snippet = await Snippet.findById(req.params.id);
-  res.json(snippet);
-});
-
-// create
-router.post("/", async (req, res) => {
-  const snippet = await Snippet.create(req.body);
-  res.status(201).json(snippet);
-});
-
-// update
-router.put("/:id", async (req, res) => {
-  const updated = await Snippet.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.json(updated);
-});
-
-// delete
-router.delete("/:id", async (req, res) => {
-  await Snippet.findByIdAndDelete(req.params.id);
-  res.status(204).end();
+    const snippets = await Snippet.find(filter).sort({ createdAt: -1 });
+    res.json(snippets);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 export default router;

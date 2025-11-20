@@ -1,38 +1,48 @@
-// server/src/routes/auth.js
-import { Router } from "express";
-import jwt from "jsonwebtoken";
+// server/routes/auth.js
+import express from "express";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-const router = Router();
+const router = express.Router();
 
-// register (email)
+// Register
 router.post("/register", async (req, res) => {
-  const { email, password, username } = req.body;
-  const passwordHash = await bcrypt.hash(password, 10);
-  const user = await User.create({ email, username, passwordHash, provider: "local" });
-  res.status(201).json({ id: user._id });
+  try {
+    const { name, email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ message: "User already exists" });
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    const newUser = new User({ name, email, passwordHash });
+    await newUser.save();
+
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+    res.json({ user: { id: newUser._id, name: newUser.name, email: newUser.email }, token });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
-// login (email)
+// Login
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email, provider: "local" });
-  if (!user) return res.status(401).json({ message: "Invalid credentials" });
-  const ok = await bcrypt.compare(password, user.passwordHash);
-  if (!ok) return res.status(401).json({ message: "Invalid credentials" });
-  const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-  res.json({ token });
-});
+  try {
+    const { email, password } = req.body;
 
-// google/github: accept provider token -> verify -> issue JWT (implement later)
-router.post("/provider", async (req, res) => {
-  // { provider: "google"|"github", email, username, avatar }
-  const { provider, email, username, avatar } = req.body;
-  let user = await User.findOne({ email });
-  if (!user) user = await User.create({ email, username, avatar, provider });
-  const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-  res.json({ token });
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+    res.json({ user: { id: user._id, name: user.name, email: user.email }, token });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 export default router;
