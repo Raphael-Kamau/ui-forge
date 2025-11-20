@@ -1,0 +1,7 @@
+/* Minimal styles for Home page hero */
+.hero-section {
+  background: linear-gradient(180deg, #0d6efd 0%, #0b5ed7 100%);
+  padding: 60px 0;
+}
+.hero-content { max-width: 720px; }
+.hero-content .search-bar { max-width: 640px; margin: 0 auto; }
