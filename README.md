@@ -14,14 +14,14 @@ Helps students, educators, and self‑learners accelerate their projects without
 
 ## ✨ Features
 🔐 Authentication: Register, login, and manage sessions with JWT.
-![alt text](image-5.png)
-![alt text](image-4.png)
+![register](image-5.png)
+![login](image-4.png)
 
 📚 Snippet Library: Search and filter UI snippets by category, framework, and tags.
-![alt text](image-6.png)
+![snippet](image-6.png)
 
 🛠️ Support System: Submit feedback or issues directly from the frontend.
-![alt text](image-7.png)
+![support](image-7.png)
 
 ⚡ Modern Stack: React, Vite, TailwindCSS, Node.js, Express, MongoDB.
 
