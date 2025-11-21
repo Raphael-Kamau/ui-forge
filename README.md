@@ -1,42 +1,52 @@
-# UI Forge 
-
-UI Forge is a full‑stack platform for discovering, testing, and managing reusable UI snippets.  
-It combines a **React + Vite frontend** with a **Node.js + Express + MongoDB backend**, providing authentication, snippet search, and support features.
-You can view the live demo of the site here https://ui-forge-pihg.vercel.app/
+# UI Forge
+UI Forge is a full‑stack platform for discovering, testing, and managing reusable UI snippets. It combines a React + Vite frontend with a Node.js + Express + MongoDB backend, providing authentication, snippet search, and support features. You can view the live demo of the site here: https://ui-forge-pihg.vercel.app
+The backend is deployed on Render.
+https://ui-forge-1.onrender.com/
+![alt text](image-3.png)
 
 ## 🌍 UI Forge and the UN Sustainable Development Goals (SDGs)
-UI Forge is more than a snippet library — it’s a platform that empowers developers, educators, and communities to build scalable solutions. 
+UI Forge is more than a snippet library — it’s a platform that empowers developers, educators, and communities to build scalable solutions.
 
-### SDG 4: Quality Education
+SDG 4: Quality Education
+Provides open access to reusable UI snippets and clear documentation.
 
-- Provides open access to reusable UI snippets and clear documentation.
-
-- Helps students, educators, and self‑learners accelerate their projects without reinventing the wheel.
----
+Helps students, educators, and self‑learners accelerate their projects without reinventing the wheel.
 
 ## ✨ Features
-- 🔐 **Authentication**: Register, login, and manage sessions with JWT.
-![alt text](image.png)
-![alt text](image-1.png)
-- 📚 **Snippet Library**: Search and filter UI snippets by category, framework, and tags.
-![alt text](image-2.png)
-- 🛠️ **Support System**: Submit feedback or issues directly from the frontend.
-- ⚡ **Modern Stack**: React, Vite, TailwindCSS, Node.js, Express, MongoDB.
-- 🧩 **Centralized API Service**: Axios service layer for clean frontend requests.
-- 🩺 **Health Check**: `/api/health` endpoint to verify backend connectivity.
+🔐 Authentication: Register, login, and manage sessions with JWT.
 
----
+📚 Snippet Library: Search and filter UI snippets by category, framework, and tags.
+
+🛠️ Support System: Submit feedback or issues directly from the frontend.
+
+⚡ Modern Stack: React, Vite, TailwindCSS, Node.js, Express, MongoDB.
+
+🧩 Centralized API Service: Axios service layer for clean frontend requests.
+
+🩺 Health Check: /api/health endpoint to verify backend connectivity.
 
 ## 📂 Project Structure
-ui-forge/ ├── client/ # Frontend (React + Vite) │ ├── src/ │ │ ├── components/ # Reusable UI components │ │ ├── pages/ # Page-level views (Home, Login, Register) │ │ ├── services/ # API service layer (api.ts) │ │ └── context/ # AuthContext for global state │ └── .env.example # Example environment variables for frontend ├── server/ # Backend (Node.js + Express) │ ├── src/ │ │ ├── models/ # Mongoose models (User, Snippet) │ │ ├── routes/ # Express routes (auth, snippets, support) │ │ └── server.js # Entry point │ └── .env.example # Example environment variables for backend └── README.md
-
-
----
-
+Code
+ui-forge/
+├── client/               # Frontend (React + Vite)
+│   ├── src/
+│   │   ├── components/   # Reusable UI components
+│   │   ├── pages/        # Page-level views (Home, Login, Register)
+│   │   ├── services/     # API service layer (api.ts)
+│   │   └── context/      # AuthContext for global state
+│   └── .env.example      # Example environment variables for frontend
+├── server/               # Backend (Node.js + Express)
+│   ├── index.js          # Entry point
+│   ├── models/           # Mongoose models (User, Snippet)
+│   ├── routes/           # Express routes (auth, snippets, support)
+│   ├── seed.js           # Seeder script for snippets and users
+│   ├── .env              # Environment variables (not committed)
+│   └── .env.example      # Example environment variables for backend
+└── README.md
 ## ⚙️ Setup
-
-### 1. Clone the repository
-```bash
+```
+1. Clone the repository
+bash
 git clone https://github.com/your-username/ui-forge.git
 cd ui-forge
 2. Backend setup
@@ -45,7 +55,7 @@ cd server
 npm install
 Create .env from .env.example:
 
-env
+Code
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/uiforge
 JWT_SECRET=supersecretkey123
@@ -60,19 +70,33 @@ cd client
 npm install
 Create .env from .env.example:
 
-env
+Code
 VITE_API_URL=http://localhost:5000/api
 VITE_APP_NAME=UI Forge
 Run frontend:
 
 bash
 npm run dev
-``` 
+```
+## 🚀 Backend Deployment on Render
+If you're deploying the backend to Render, use the following settings:
+
+Field	Value
+Root Directory	server
+Build Command	npm install
+Start Command	npm start
+Make sure your server/package.json includes:
+
+json
+"scripts": {
+  "start": "node index.js",
+  "dev": "nodemon index.js"
+}
+And your .env file is placed inside server/.
 
 ## 🧪 Testing
 Health Check
-Visit http://localhost:5000/api/health 
-Expected response:
+Visit: http://localhost:5000/api/health Expected response:
 
 json
 { "status": "ok", "message": "UI Forge backend is running 🚀" }
@@ -81,16 +105,21 @@ Register: POST /api/auth/register
 
 Login: POST /api/auth/login
 
-
 ## 🤝 Contributing
 Fork the repo
 
-Create a feature branch (git checkout -b feature/my-feature)
+Create a feature branch
 
-Commit changes (git commit -m "Add my feature")
+bash
+git checkout -b feature/my-feature
+Commit changes
 
-Push branch (git push origin feature/my-feature)
+bash
+git commit -m "Add my feature"
+Push branch
 
+bash
+git push origin feature/my-feature
 Open a Pull Request
 
 ## 📜 License
