@@ -1,24 +1,26 @@
-// src/pages/SnippetDetail.tsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { Button, Row, Col, Card } from "react-bootstrap";
+import { Button, Row, Col, Card, Spinner } from "react-bootstrap";
 import { useToast } from "../context/ToastContext";
 import type { Snippet } from "../types/snippet";
+import { fetchSnippetById } from "../services/snippetApi";
 
 const SnippetDetail: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [snippet, setSnippet] = useState<Snippet | null>(null);
+  const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
 
   useEffect(() => {
     if (!id) return;
-    axios.get<Snippet>(`/api/snippets/${id}`)
-      .then(res => setSnippet(res.data))
+    setLoading(true);
+    fetchSnippetById(id)
+      .then(setSnippet)
       .catch(err => {
         console.error("API error:", err);
         showToast({ body: "Failed to load snippet", bg: "danger" });
-      });
+      })
+      .finally(() => setLoading(false));
   }, [id]);
 
   const copyCode = async () => {
@@ -27,7 +29,9 @@ const SnippetDetail: React.FC = () => {
     showToast({ body: "Code copied!", bg: "success" });
   };
 
-  if (!snippet) return <div>Loading...</div>;
+  if (loading) return <Spinner animation="border" />;
+
+  if (!snippet) return <div>No snippet found</div>;
 
   return (
     <Row>

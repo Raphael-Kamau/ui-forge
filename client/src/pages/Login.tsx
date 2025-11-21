@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { Form, Button, Container, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
+import { loginUser } from "../services/authApi";
 
 const Login: React.FC = () => {
   const { login } = useAuth();
@@ -12,11 +12,8 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
-        email,
-        password,
-      });
-      login(res.data.user, res.data.token); // ✅ store user + token
+      const data = await loginUser({ email, password });
+      login(data.user, data.token); // ✅ store user + token
       setStatus("Login successful 🚀");
     } catch (err: any) {
       setStatus(err.response?.data?.message || "Login failed ❌");
@@ -26,7 +23,11 @@ const Login: React.FC = () => {
   return (
     <Container className="mt-5" style={{ maxWidth: "500px" }}>
       <h2 className="mb-4">Login</h2>
-      {status && <Alert variant={status.includes("failed") ? "danger" : "success"}>{status}</Alert>}
+      {status && (
+        <Alert variant={status.includes("failed") ? "danger" : "success"}>
+          {status}
+        </Alert>
+      )}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
