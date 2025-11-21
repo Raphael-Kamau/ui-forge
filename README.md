@@ -2,7 +2,7 @@
 
 UI Forge is a full‑stack platform for discovering, testing, and managing reusable UI snippets.  
 It combines a **React + Vite frontend** with a **Node.js + Express + MongoDB backend**, providing authentication, snippet search, and support features.
-You can view the live demo of the site here https://github.com/
+You can view the live demo of the site here https://ui-forge-pihg.vercel.app/
 
 ## 🌍 UI Forge and the UN Sustainable Development Goals (SDGs)
 UI Forge is more than a snippet library — it’s a platform that empowers developers, educators, and communities to build scalable solutions. 
