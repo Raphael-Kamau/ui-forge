@@ -26,5 +26,5 @@ dist/
 build/
 coverage/
 
-# Optional: MongoDB dump files
+# MongoDB dump files
 dump/
