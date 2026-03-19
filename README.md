@@ -1,7 +1,10 @@
 # UI Forge
-UI Forge is a full‑stack platform for discovering, testing, and managing reusable UI snippets. It combines a React + Vite frontend with a Node.js + Express + MongoDB backend, providing authentication, snippet search, and support features. You can view the live demo of the site here: https://ui-forge-pihg.vercel.app
-The backend is deployed on Render.
-https://ui-forge-1.onrender.com/
+UI Forge is a full‑stack platform for discovering, testing, and managing reusable UI snippets. It combines a React + Vite frontend with a Node.js + Express + MongoDB backend, providing authentication, snippet search, and support features. 
+- You can view the live demo of the site here: https://ui-forge-pihg.vercel.app
+
+<img width="1213" height="668" alt="image" src="https://github.com/user-attachments/assets/28bf6909-da19-4cce-9fd6-a1cd46841a4c" />
+
+- The backend is deployed on Render: https://ui-forge-1.onrender.com/
 ![alt text](image-3.png)
 
 ## 🌍 UI Forge and the UN Sustainable Development Goals (SDGs)
